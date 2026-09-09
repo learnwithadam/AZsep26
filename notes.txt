@@ -10,3 +10,24 @@ $ sudo curl -L "https://kind.sigs.k8s.io/dl/v0.20.0/kind-$(uname)-amd64" -o /usr
 $ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 $ kind create cluster --name wezvatechdev --config=kindcluster.yml
+
+pod1.yml
+----------
+kind: Pod                         # Object Type
+apiVersion: v1                    # API version
+metadata:                         # Set of data which describes the Object
+  name: testpod                  # Name of the Object
+spec:                             # Data which describes the state of the Object
+  containers:                     # Data which describes the Container details
+    - name: c00                   # Name of the Container
+      image: ubuntu              # Base Image which is used to create Container
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Adam; sleep 8 ; done"]
+ 
+
+$ kubectl apply -f pod1.yml
+$ kubectl get pods
+$ kubectl get pods -o wide
+$ kubectl delete -f pod1.yml
+$ kubectl describe pod testpod
+$ kubectl logs -f testpod
+$ kubectl exec testpod -- ps -ef
