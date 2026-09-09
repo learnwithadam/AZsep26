@@ -45,3 +45,31 @@ spec:
     - name: sidecar
       image: centos:centos8
       command: ["/bin/bash", "-c", "while true; do echo Hello-Students; sleep 10 ; done"]
+
+
+DEPLOYMENT
+==========
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: mydeploy
+spec:
+   replicas: 2
+   selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     name: deployment
+   template:      # pod template
+     metadata:
+       name: testpod
+       labels:
+         name: deployment
+     spec:
+      containers:
+        - name: c00
+          image: ubuntu  # ubuntu:22.10
+          command: ["/bin/bash", "-c", "while true; do echo Hello-Adam; sleep 5; done"]
+
+$ kubectl get deploy
+$ kubectl get rs
+$ kubectl describe deploy mydeploy
+$ kubectl rollout undo deploy/mydeploy --to-revision=1
