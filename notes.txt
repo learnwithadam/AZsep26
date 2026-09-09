@@ -1,0 +1,12 @@
+#- KUBERNETES -#
+   ==========
+
+$ sudo apt update
+$ sudo apt install -y docker.io
+$ sudo usermod -a -G docker ubuntu
+
+$ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+$ sudo curl -L "https://kind.sigs.k8s.io/dl/v0.20.0/kind-$(uname)-amd64" -o /usr/local/bin/kind && sudo chmod +x /usr/local/bin/kind
+$ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+$ kind create cluster --name wezvatechdev --config=kindcluster.yml
