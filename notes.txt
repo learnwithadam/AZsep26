@@ -31,3 +31,17 @@ $ kubectl delete -f pod1.yml
 $ kubectl describe pod testpod
 $ kubectl logs -f testpod
 $ kubectl exec testpod -- ps -ef
+
+--------------------pod2.yml----------
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod2
+spec:
+  containers:
+    - name: main
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Adam; sleep 10 ; done"]
+    - name: sidecar
+      image: centos:centos8
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Students; sleep 10 ; done"]
