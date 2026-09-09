@@ -47,6 +47,18 @@ spec:
       command: ["/bin/bash", "-c", "while true; do echo Hello-Students; sleep 10 ; done"]
 
 
+-----------------POD3.yml-----------
+kind: Pod
+apiVersion: v1
+metadata:
+  name: portexpose
+spec:
+  containers:
+    - name: c00
+      image: httpd
+      ports:
+       - containerPort: 80 
+
 DEPLOYMENT
 ==========
 kind: Deployment
