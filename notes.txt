@@ -85,3 +85,27 @@ $ kubectl get deploy
 $ kubectl get rs
 $ kubectl describe deploy mydeploy
 $ kubectl rollout undo deploy/mydeploy --to-revision=1
+
+-----daemonset----
+kind: DaemonSet      # Type of Object
+apiVersion: apps/v1
+metadata:
+  name: demodaemonset
+  labels:
+    env: demo
+spec:
+  selector:
+    matchLabels:
+      env: demo
+  template:
+    metadata:
+      labels:
+        env: demo
+    spec:
+      containers:
+      - name: demonset
+        image: ubuntu
+        command: ["/bin/bash", "-c", "while true; do echo Hello-Adam; sleep 8 ; done"]
+
+
+$ kubectl get ds
