@@ -109,3 +109,26 @@ spec:
 
 
 $ kubectl get ds
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: initpod
+spec:
+  initContainers:
+  - name: init
+    image: centos:centos8
+    command: ["/bin/sh", "-c", "echo WEZVATECH-KUBERNETES > /tmp/xchange/testfile; sleep 30"]
+    volumeMounts:        
+      - name: xchange
+        mountPath: "/tmp/xchange"  
+  containers:   # main containers
+  - name: main
+    image: ubuntu
+    command: ["/bin/bash", "-c", "while true; do echo `cat /tmp/data/testfile`; sleep 5; done"]
+    volumeMounts:
+      - name: xchange
+        mountPath: "/tmp/data"
+  volumes:                            
+  - name: xchange
+    emptyDir: {}
