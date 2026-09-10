@@ -132,3 +132,20 @@ spec:
   volumes:                            
   - name: xchange
     emptyDir: {}
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod2
+spec:
+  containers:
+    - name: main
+      image: httpd
+      ports:
+       - containerPort: 80 
+    - name: sidecar
+      image: centos:centos8
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Students; sleep 10 ; done"]
+
+$ kubectl exec testpod2 -c sidecar -- curl localhost:80
