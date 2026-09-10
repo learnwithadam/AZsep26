@@ -149,3 +149,41 @@ spec:
       command: ["/bin/bash", "-c", "while true; do echo Hello-Students; sleep 10 ; done"]
 
 $ kubectl exec testpod2 -c sidecar -- curl localhost:80
+
+SERVICE
+=======
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: mydeploy
+spec:
+   replicas: 2
+   selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     name: deployment
+   template:
+     metadata:
+       name: testpod8
+       labels:
+         name: deployment
+     spec:
+      containers:
+        - name: c00
+          image: httpd
+          ports:
+           - containerPort: 80
+
+
+---------------------svc.yml
+kind: Service                             # Defines to create Service type Object
+apiVersion: v1
+metadata:
+  name: demoservice
+spec:
+  ports:
+    - port: 80                               # service port exposed
+      targetPort: 80                     # Pods port
+      nodePort: 30000
+  selector:
+    name: deployment    # Apply this service to any pods which has the specific label
+  type: NodePort
