@@ -229,4 +229,13 @@ spec:
          - key: sample.conf # the name of the file used during creating the map
            path: sample.conf
 
+-- INSTALL TERRAFORM --
+Install through Package:
+ $ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+ $ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+ $ sudo apt-get update && sudo apt-get install terraform
 
+Install specific version:
+ $ curl -O https://releases.hashicorp.com/terraform/0.15.2/terraform_0.15.2_linux_amd64.zip https://releases.hashicorp.com/terraform/
+ $ sudo apt install -y unzip
+ $ sudo unzip terraform_0.15.2_linux_amd64.zip -d /usr/local/bin/
